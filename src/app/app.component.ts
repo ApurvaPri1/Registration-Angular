@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  courses = []
   title = 'my-app';
+  inputVariable = "Hi i am parents of input properties "
+
+  getData(value){
+    console.log(value)
+  }
+  firstName:string="welcome"
 }

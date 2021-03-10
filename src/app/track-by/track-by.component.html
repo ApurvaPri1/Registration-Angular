@@ -1,0 +1,7 @@
+<!-- <p>track-by works!</p> -->
+<button (click)="loadCourse()">Load Course</button>
+<ul>
+    <li *ngFor = "let course of courses; trackBy: trackCourses">
+        {{ course.name }}
+    </li>
+</ul>
