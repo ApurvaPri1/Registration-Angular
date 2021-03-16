@@ -1,0 +1,118 @@
+<form [formGroup]="myReactiveForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="fnText">Name</label>
+    <input type="text" formControlName="name" [ngClass]="{'form-control': true,
+      'is-invalid': name.invalid && name.touched,
+      'is-valid': name.valid}" id="fnText" placeholder="Enter name">
+    <div id="fnHelp" *ngIf="name.errors?.required && name.touched" class="form-text custom-invalid-feedback">Field is
+      required</div>
+    <div id="fnHelp" *ngIf="name.errors?.minlength && name.touched" class="form-text custom-invalid-feedback">Value
+      must contain atleast 2 characters</div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="fnText">Age</label>
+    <input type="number" formControlName="age" [ngClass]="{'form-control': true,
+      'is-invalid': age.invalid && age.touched,
+      'is-valid': age.valid}" id="age" placeholder="Enter the age">
+    <div id="fnHelp" *ngIf="age.errors?.required && age.touched" class="form-text custom-invalid-feedback">Field is
+      required</div>
+  </div>
+
+  <div class="form-group">
+    <label for="fnText">Email id</label>
+    <input type="email" formControlName="email" [ngClass]="{'form-control': true,
+      'is-invalid': email.invalid && email.touched,
+      'is-valid': email.valid}" id="age" placeholder="Enter the age">
+    <div id="fnHelp" *ngIf="email.errors?.required && email.touched" class="form-text custom-invalid-feedback">Field is
+      required</div>
+      <div id="fnHelp" *ngIf="email.errors?.email && email.touched" class="form-text custom-invalid-feedback">Email id is not valid</div>
+        <div id="fnHelp" *ngIf="email.errors?.pattern && email.touched" class="form-text custom-invalid-feedback">Email id is not match with pattern</div>
+  </div>
+
+
+  <div class="form-group">
+    <label for="fnText">Mobile Number</label>
+    <input type="text" formControlName="mobnum" [ngClass]="{'form-control': true,
+      'is-invalid': mobnum.invalid && mobnum.touched,
+      'is-valid': mobnum.valid}" id="mobnum" placeholder="Enter the Mobile Number">
+    <div id="fnHelp" *ngIf="mobnum.errors?.required && mobnum.touched" class="form-text custom-invalid-feedback">Field is required</div>
+        <div id="fnHelp" *ngIf="mobnum.errors?.pattern && mobnum.touched" class="form-text custom-invalid-feedback">Only Indian Mobile Number required</div>
+  </div>
+
+  <div class="form-group">
+    <label for="occupation">Occupation</label>
+    <select id="occupation" formControlName="occupation" [ngClass]="{'form-control': true,
+    'is-invalid': occupation.invalid && occupation.touched,
+    'is-valid': occupation.valid}" id="occupation">
+      <option selected [ngValue]="null">Choose...</option>
+      <option *ngFor="let method of Occupations" [value]="method.id">{{ method.name }}</option>
+    </select>
+    <small *ngIf="occupation.invalid && occupation.touched" class="form-text custom-invalid-feedback">Field is to be select</small>
+  </div>
+
+
+  <div formArrayName="address">
+    <div *ngFor="let group of addressArray.controls; let i = index;" [formGroupName]="i">
+      <h4>Address {{i+1}}</h4>
+      <button (click)="addAddress()" class="btn btn-light btn-sm">+ Add Address</button>
+      <button (click)="removeAddress(i)" class="btn btn-light btn-sm">- Remove </button>
+      <div class="form-group">
+        <label for="addText">Address1</label>
+        <input type="text" formControlName="addressone" [ngClass]="{'form-control': true,
+                        'is-invalid': group.controls.addressone.invalid && group.controls.addressone.touched,
+                        'is-valid': group.controls.addressone.valid}" id="addText" placeholder="Enter address">
+        <small *ngIf="group.controls.addressone.invalid && group.controls.addressone.touched"
+          class="form-text custom-invalid-feedback">Field is required</small>
+      </div>
+      <div class="form-group">
+        <label for="addText">Address2</label>
+        <input type="text" formControlName="addresstwo" [ngClass]="{'form-control': true,
+                        'is-invalid': group.controls.addresstwo.invalid && group.controls.addresstwo.touched,
+                        'is-valid': group.controls.addresstwo.valid}" id="addText" placeholder="Enter address">
+        <small *ngIf="group.controls.addresstwo.invalid && group.controls.addresstwo.touched"
+          class="form-text custom-invalid-feedback">Field is required</small>
+      </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" formControlName="city" [ngClass]="{'form-control': true,
+                        'is-invalid': group.controls.city.invalid && group.controls.city.touched,
+                        'is-valid': group.controls.city.valid}" id="city" placeholder="Enter city">
+        <small *ngIf="group.controls.city.invalid && group.controls.city.touched"
+          class="form-text custom-invalid-feedback">Field is required</small>
+      </div>
+
+
+      <div class="form-group">
+        <label for="city">State</label>
+        <input type="text" formControlName="state" [ngClass]="{'form-control': true,
+                        'is-invalid': group.controls.state.invalid && group.controls.state.touched,
+                        'is-valid': group.controls.state.valid}" id="state" placeholder="Enter State">
+        <small *ngIf="group.controls.state.invalid && group.controls.state.touched"
+          class="form-text custom-invalid-feedback">Field is required</small>
+      </div>
+      <div class="form-group">
+        <label for="zipcode">Pin Code</label>
+        <input type="text" formControlName="zipcode" [ngClass]="{'form-control': true,
+          'is-invalid': group.controls.zipcode.invalid && group.controls.zipcode.touched,
+          'is-valid':  group.controls.zipcode.valid}" id="zipcode" placeholder="Enter Pincode">
+        <small *ngIf="group.controls.zipcode.errors?.required && group.controls.zipcode.touched"
+          class="form-text custom-invalid-feedback">Field is required</small>
+        <small *ngIf="group.controls.zipcode.errors?.pattern && group.controls.zipcode.touched"
+          class="form-text custom-invalid-feedback">Value should be 6 digit number.</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" formControlName="primaryFlg" type="checkbox" value="" id="defaultCheck1">
+    <label class="form-check-label" for="defaultCheck1">
+      I agree terms and conditions
+    </label>
+  </div>
+
+  <div class="form-group">
+    <re-captcha formControlName="recaptcha"></re-captcha>
+  </div>
+  <button class="btn btn-primary" [disabled]="!myReactiveForm.valid">Submit</button>
+</form>

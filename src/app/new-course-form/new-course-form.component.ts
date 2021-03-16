@@ -8,12 +8,12 @@ import { FormGroup, FormArray, FormControl } from '@angular/forms';
 })
 export class NewCourseFormComponent {
   form = new FormGroup({
-    topics: new FormArray([])
+    topics: new FormArray([]) 
   });
 
   addTopic(topic: HTMLInputElement) { 
     // (this.form.get('topics') as FormArray).push(new FormControl(topic.value));
-    this.topics.push(new FormControl(topic.value));
+    this.topics.push(new FormControl(topic.value)); 
     topic.value= ''
   }
 

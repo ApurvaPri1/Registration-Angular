@@ -16,6 +16,14 @@ import { NewCourseFormComponent } from './new-course-form/new-course-form.compon
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { NestedFormComponent } from './nested-form/nested-form.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { RegisterFormComponent } from './register-form/register-form.component';
+import {
+  RecaptchaFormsModule,
+  RecaptchaModule,
+  RECAPTCHA_SETTINGS,
+  RecaptchaSettings
+} from "ng-recaptcha";
+import { RegsFormComponent } from './regs-form/regs-form.component';
 
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -33,17 +41,27 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     NewCourseFormComponent,
     RegistrationFormComponent,
     NestedFormComponent,
+    RegisterFormComponent,
+    RegsFormComponent,
   ], 
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    RecaptchaFormsModule,
+    RecaptchaModule
     // NgbModule.forRoot()
   ],
   providers: [
-    AuthorsService
+    AuthorsService,
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: '6LediXkaAAAAADj9My8U-jQKQbPSb4G0eWebJEbh'
+      } as RecaptchaSettings
+    }
   ],
   bootstrap: [AppComponent]
 })

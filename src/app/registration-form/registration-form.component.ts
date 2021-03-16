@@ -42,7 +42,7 @@ export class RegistrationFormComponent {
     return this.form.get('addresses') as FormArray;
   }
   log(x) {
-    console.log(x)
+    console.log(x) 
   }
   submit(g) {
     console.log(g)  
